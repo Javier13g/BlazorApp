@@ -1,0 +1,55 @@
+﻿@page "/editar/{Id:int}"
+@inject NavigationManager Nav
+@using System.Net.Http
+@using Data
+@using System.Net.Http.Json
+@inject HttpClient Http
+<h3>Editar</h3>
+
+<EditForm Model="@libros">
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Titutlo</label>
+               <InputText class="form-control" placeholder="Titulo del libro" @bind-Value="@libros.Title"></InputText>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Categoria</label>
+                <InputText class="form-control" placeholder="Categoria del libro" @bind-Value="@libros.Category"></InputText>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Sinopsis</label>
+            <InputTextArea class="form-control" placeholder="Sinopsis del libro" @bind-Value="@libros.Synopsis"></InputTextArea>
+        </div>
+        <button class="btn btn-primary" @onclick="EditarBook">editar</button>
+</form>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    Libros libros = new Libros();
+    RespuestaFront<object> resp = new RespuestaFront<object>();
+    RespuestaFront<Libros> respBook = new RespuestaFront<Libros>();
+    public string API = "/api/Books";
+
+    //Funcion asincrona para guardar datos insertados en el formulario
+    private async Task EditarBook()
+    {
+        var x = await Http.PutAsJsonAsync(API, libros);
+        resp = x.Content.ReadFromJsonAsync<RespuestaFront<object>>().Result;
+
+
+        Nav.NavigateTo("/libros");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id != 0)
+        {
+            respBook = await Http.GetFromJsonAsync<RespuestaFront<Libros>>(API +"/"+ Id);
+            libros = respBook.CongragulationData;
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "nAzs7cP6RhMEthUVvXu3XcyLQj3wept/AAi7ANxG/H/b1se8k/okorUKLJaoW90Nnm0+H+Y5xiBsL/5d8FvntQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\abdie\\Documents\\GitHub\\BlazorApp\\BookCrudBlazor\\BookCrudBlazor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\abdie\\.nuget\\packages\\system.net.http.json\\3.2.1\\system.net.http.json.3.2.1.nupkg.sha512",
+    "C:\\Users\\abdie\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
+  ],
+  "logs": []
+}

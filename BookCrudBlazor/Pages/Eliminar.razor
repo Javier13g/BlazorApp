@@ -1,0 +1,31 @@
+﻿@page "/eliminar/{Id:int}"
+@inject NavigationManager Nav
+@using System.Net.Http
+@using BookCrudBlazor.Data
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject IJSRuntime iJSRuntime;
+<h3>Eliminar</h3>
+
+<p>Quiere borrar @Id?</p>
+<div>
+    <button  class="btn btn-danger" @onclick="EliminarBook">Eliminar</button>
+    <button  class="btn btn-warning" @onclick="Cancelar">Cancelar</button>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    public string API = "/api/Books";
+    RespuestaFront<object> resp = new RespuestaFront<object>();
+
+    private async Task EliminarBook()
+    {
+        var x = await Http.DeleteAsync(API +"/"+ Id);
+        resp = x.Content.ReadFromJsonAsync<RespuestaFront<object>>().Result;
+        await iJSRuntime.InvokeVoidAsync("AlertBorrarLibro");
+        Nav.NavigateTo("/libros");
+    }
+    private void Cancelar() => Nav.NavigateTo("/libros");
+
+}
