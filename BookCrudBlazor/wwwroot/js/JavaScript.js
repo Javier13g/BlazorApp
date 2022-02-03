@@ -19,6 +19,7 @@
 }
 
 function AlertGuardarLibro() {
+    alert("Libro Guardado");
     alertify.alert('Exito!', function () { alertify.success('Libro guardado con exito'); });
 
 }

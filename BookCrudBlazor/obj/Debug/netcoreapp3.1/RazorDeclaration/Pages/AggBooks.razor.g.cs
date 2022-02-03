@@ -112,8 +112,9 @@ using System.Net.Http.Json;
     {
         var x = await Http.PostAsJsonAsync<Libros>(API, libros);
         resp = x.Content.ReadFromJsonAsync<RespuestaFront<object>>().Result;
-        await iJSRuntime.InvokeVoidAsync("AlertGuardarLibro");
         Nav.NavigateTo("/libros");
+        await iJSRuntime.InvokeVoidAsync("AlertGuardarLibro");
+        
     }
 
     protected override async Task OnInitializedAsync()
